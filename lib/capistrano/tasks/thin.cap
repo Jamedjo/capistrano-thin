@@ -1,4 +1,5 @@
 namespace :deploy do
+  after :publishing, :restart
   commands = %w(start stop)
 
   commands.each do |command|
