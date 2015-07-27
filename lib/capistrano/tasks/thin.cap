@@ -1,5 +1,5 @@
 namespace :deploy do
-  commands = %w(start stop restart)
+  commands = %w(start stop)
 
   commands.each do |command|
     task command do
@@ -9,6 +9,12 @@ namespace :deploy do
         end
       end
     end
+  end
+
+  # Stop then start, otherwise old code still runs after redeploy
+  task :restart do
+    invoke 'deploy:stop'
+    invoke 'deploy:start'
   end
 
   # RVM integration
